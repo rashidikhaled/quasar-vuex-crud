@@ -32,7 +32,6 @@ const store = createStore({
   },
   actions: {
     async fetchItems({ commit }) {
-      console.log("**fetchItems in store Run!");
       commit("SET_LOADING", true);
       try {
         const response = await mockApi.getItems();
@@ -43,6 +42,11 @@ const store = createStore({
         commit("SET_LOADING", false);
       }
     },
+  },
+  getters: {
+    allItems: (state) => state.items,
+    isLoading: (state) => state.isLoading,
+    error: (state) => state.error,
   },
 });
 export { store };
