@@ -32,7 +32,18 @@
       </div>
     </div>
     <!--Dta table-->
-    <q-table title="Treats" :rows="rows" :columns="columns" row-key="name" />
+    <q-table
+      title="Treats"
+      :rows="items"
+      :columns="columns"
+      :loading="loading"
+      row-key="name">
+      <template v-slot:loading>
+        <q-inner-loading showing color="primary">
+          <q-spinner-gears size="50px" color="primary" />
+        </q-inner-loading>
+      </template>
+    </q-table>
   </q-page>
 </template>
 <script>
@@ -59,6 +70,17 @@ export default {
       ],
       rows: [],
     };
+  },
+  computed: {
+    items() {
+      return this.$store.getters.allItems;
+    },
+    loading() {
+      return this.$store.getters.isLoading;
+    },
+  },
+  created() {
+    this.$store.dispatch("fetchItems");
   },
 };
 </script>
