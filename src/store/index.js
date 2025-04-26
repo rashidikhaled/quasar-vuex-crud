@@ -1,6 +1,7 @@
 import mockApi from "../api/mockApi";
+import { createStore } from "vuex";
 
-export default {
+const store = createStore({
   state: {
     items: [],
     loading: false,
@@ -31,10 +32,10 @@ export default {
   },
   actions: {
     async fetchItems({ commit }) {
+      console.log("**fetchItems in store Run!");
       commit("SET_LOADING", true);
       try {
-        const params = {};
-        const response = await mockApi.getItems(params);
+        const response = await mockApi.getItems();
         commit("SET_ITEMS", { items: response.data });
       } catch (error) {
         commit("SET_ERROR", error.message);
@@ -43,4 +44,5 @@ export default {
       }
     },
   },
-};
+});
+export { store };
