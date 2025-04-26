@@ -8,7 +8,9 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container> </q-page-container>
+    <q-page-container>
+      <data-table />
+    </q-page-container>
 
     <q-dialog v-model="showHelp">
       <q-card class="my-card">
@@ -26,9 +28,10 @@
   </q-layout>
 </template>
 <script>
+import DataTable from "./components/DataTable.vue";
 export default {
   name: "App",
-  components: {},
+  components: { DataTable },
   data() {
     return {
       showHelp: false,
